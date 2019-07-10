@@ -6,11 +6,13 @@ import logging
 import sortinghat
 
 client = discord.Client()
-token = ''
-sorting_channel = ''
 
-if token == '' or sorting_channel == '':
-    print('Please enter an appropriate bot token and channel ID to begin')
+try:
+    token = os.environ['TOKEN']
+    sorting_channel = os.environ['CHANNEL_ID']
+except KeyError:
+    print('Pleae provide an appropriate bot token and channel ID to begin. Use: export TOKEN = \'my_token_here\' and export CHANNEL_ID = \'my_channel_id\'.')
+    client.close()
 
 sorting_hat = sortinghat.SortingHat(client)
 
